@@ -1,38 +1,30 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "birdsnests",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Bird's Nests",
+  "description": "Bird's Nests port to Fabric. Bird's Nests is a simple mod that adds a pseudo-random reward event from chopping trees.",
   "authors": [
-    "Me!"
+    "Daniking"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/members/danik1ngrd/projects",
+    "sources": "https://github.com/DanikingRD/BirdsNests"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
-
+  "license": "MIT",
+  "icon": "assets/birdsnests/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "daniking.birdsnests.BirdsNests"
     ]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
-
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
     "minecraft": "1.18.x",
     "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
