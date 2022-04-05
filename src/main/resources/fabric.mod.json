@@ -13,7 +13,7 @@
     "sources": "https://github.com/DanikingRD/BirdsNests"
   },
 
-  "license": "MIT",
+  "license": "GNU Lesser General Public License",
   "icon": "assets/birdsnests/icon.png",
   "environment": "*",
   "entrypoints": {
