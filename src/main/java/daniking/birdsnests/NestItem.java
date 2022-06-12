@@ -14,10 +14,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.Random;
 
 public class NestItem extends Item {
 
@@ -44,7 +44,7 @@ public class NestItem extends Item {
         final LootTable table = world.getServer().getLootManager().getTable(new Identifier(BirdsNests.MODID, "nest/nest_loot"));
         final List<ItemStack> loot = table.generateLoot(new LootContext.Builder(world).build(LootContextType.create().build()));
         if (!loot.isEmpty()) {
-            final Random random = world.getRandom();
+            final Random random  = player.getRandom();
             for (final ItemStack entry : loot) {
                 final ItemEntity entity = new ItemEntity(world, player.getX(), player.getY() + 1.5D, player.getZ(), entry);
                 entity.setVelocity(random.nextGaussian() * 0.05F, 0.2D, random.nextGaussian() * 0.05F);

@@ -5,11 +5,11 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
@@ -40,20 +40,21 @@ public class BirdsNests implements ModInitializer {
     }
 
     static void registerLootTables() {
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, supplier, setter) -> {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             for (final Identifier entry : LOOT_TABLE_IDENTIFIERS) {
                 if (id.equals(entry)) {
-                    supplier.withPool(buildLoot().build());
+                    tableBuilder.pool(buildLoot().build());
                     break;
                 }
             }
         });
+
     }
 
-    static FabricLootPoolBuilder buildLoot() {
-        return FabricLootPoolBuilder.builder()
+    static LootPool.Builder buildLoot() {
+        return LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1))
-                .withCondition(RandomChanceLootCondition.builder((float) configFile.nestDropChance).build())
-                .withEntry(ItemEntry.builder(nest).build());
+                .conditionally(RandomChanceLootCondition.builder((float) configFile.nestDropChance).build())
+                .with(ItemEntry.builder(nest).build());
     }
 }
