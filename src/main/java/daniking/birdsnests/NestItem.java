@@ -31,16 +31,16 @@ public class NestItem extends Item {
         if (!user.isCreative()) {
             stack.decrement(1);
         }
-
         world.playSound(user, user.getBlockPos(), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.NEUTRAL, 1.0F, 1.0F);
         if (!world.isClient()) {
             spawnLoot((ServerWorld) world, user);
             return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+        } else {
+            return super.use(world, user, hand);
         }
-        return super.use(world, user, hand);
     }
 
-    private void spawnLoot(ServerWorld world, PlayerEntity player) {
+    private static void spawnLoot(ServerWorld world, PlayerEntity player) {
         final LootTable table = world.getServer().getLootManager().getTable(new Identifier(BirdsNests.MODID, "nest/nest_loot"));
         final List<ItemStack> loot = table.generateLoot(new LootContext.Builder(world).build(LootContextType.create().build()));
         if (!loot.isEmpty()) {

@@ -41,14 +41,15 @@ public class BirdsNests implements ModInitializer {
 
     static void registerLootTables() {
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            for (final Identifier entry : LOOT_TABLE_IDENTIFIERS) {
-                if (id.equals(entry)) {
-                    tableBuilder.pool(buildLoot().build());
-                    break;
+            if (source.isBuiltin()) {
+                for (final Identifier entry : LOOT_TABLE_IDENTIFIERS) {
+                    if (id.equals(entry)) {
+                        tableBuilder.pool(buildLoot().build());
+                        break;
+                    }
                 }
             }
         });
-
     }
 
     static LootPool.Builder buildLoot() {
