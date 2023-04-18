@@ -8,13 +8,13 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,8 +33,8 @@ public class BirdsNests implements ModInitializer {
         AutoConfig.register(ConfigFile.class, GsonConfigSerializer::new);
         configFile = AutoConfig.getConfigHolder(ConfigFile.class).getConfig();
         // Done for late static initialization
-        nest = new NestItem(new FabricItemSettings().group(ItemGroup.MISC).maxCount(configFile.maxCount));
-        Registry.register(Registry.ITEM, new Identifier(MODID, "nest"), nest);
+        nest = new NestItem(new FabricItemSettings().maxCount(configFile.maxCount));
+        Registry.register(Registries.ITEM, new Identifier(MODID, "nest"), nest);
         registerLootTables();
         LOGGER.info("BirdsNests Initialized");
     }
