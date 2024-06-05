@@ -1,34 +1,28 @@
 {
-  "schemaVersion": 1,
-  "id": "birdsnests",
-  "version": "${version}",
+	"schemaVersion": 1,
+	"id": "birds_nests",
+	"version": "${version}",
 
-  "name": "Bird's Nests",
-  "description": "Bird's Nests port to Fabric. Bird's Nests is a simple mod that adds a pseudo-random reward event from chopping trees.",
-  "authors": [
-    "Daniking"
-  ],
-  "contributors": [
-    "DerpDerpling"
-  ],
-  "contact": {
-    "homepage": "https://www.curseforge.com/members/danik1ngrd/projects",
-    "sources": "https://github.com/DanikingRD/BirdsNests"
-  },
+	"name": "Bird's Nests",
+	"description": "Bird's Nests port to Fabric. Bird's Nests is a simple mod that adds a pseudo-random reward event from chopping trees.",
+	"authors": [
+		"Daniking"
+	],
+	"contributors": [
+		"DerpDerpling",
+		"Soumeh"
+	],
+	"contact": {
+		"homepage": "https://www.curseforge.com/members/danik1ngrd/projects",
+		"sources": "https://github.com/DanikingRD/BirdsNests"
+	},
 
-  "license": "GNU Lesser General Public License",
-  "icon": "assets/birdsnests/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "daniking.birdsnests.BirdsNests"
-    ]
-  },
-  "depends": {
-    "fabricloader": ">=0.13.3",
-    "fabric": "*",
-    "minecraft": "1.19.x",
-    "java": ">=17",
-    "cloth-config2": ">=6.2.57"
-  }
+	"license": "LGPL-2.1-only",
+	"entrypoints": {
+		"main": [ "daniking.birdsnests.BirdsNests" ],
+		"client": [ "daniking.birdsnests.BirdsNestsClient" ]
+	},
+	"depends": {
+		"fabric": "*"
+	}
 }
