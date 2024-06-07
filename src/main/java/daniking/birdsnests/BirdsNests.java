@@ -24,22 +24,16 @@ public class BirdsNests implements ModInitializer {
 
     public static final String MOD_ID = "birds_nests";
     public static final Logger LOGGER = LoggerFactory.getLogger(BirdsNests.class);
-	private static RegistryKey<LootTable> id;
 
 	public static Identifier of(String path) {
-		return new Identifier(MOD_ID, path);
+		return Identifier.of(MOD_ID, path);
 	}
-
-
-	public static float NEST_DROP_CHANCE = 0.050F;
-
 
     public static Item BIRDS_NEST = Registry.register(
             Registries.ITEM,
             of("birds_nest"),
             new BirdsNestItem(new Item.Settings())
     );
-
 
 	@Override
 	public void onInitialize() {
@@ -53,7 +47,7 @@ public class BirdsNests implements ModInitializer {
 
         var loot = LootPool.builder()
                 .rolls(ConstantLootNumberProvider.create(1))
-                .conditionally(RandomChanceLootCondition.builder(NEST_DROP_CHANCE).build())
+                .conditionally(RandomChanceLootCondition.builder(0.050F).build())
                 .with(ItemEntry.builder(BIRDS_NEST).build())
                 .build();
         builder.pool(loot);
@@ -68,7 +62,7 @@ public class BirdsNests implements ModInitializer {
 		String blockPath = split[split.length-1];
 		Identifier blockId = id.withPath(blockPath);
 		Optional<Block> block = Registries.BLOCK.getOrEmpty(blockId);
-		return block.isEmpty() ? false : block.get() instanceof LeavesBlock;
+		return block.filter(value -> value instanceof LeavesBlock).isPresent();
 	}
 
 }
